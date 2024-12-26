@@ -16,7 +16,7 @@ import (
 // parcelDetailsCmd represents the parcelDetails command
 var parcelDetailsCmd = &cobra.Command{
 	Use:   "parcelDetails",
-	Short: "Dohvaća detaljne podatke o čestici",
+	Short: "Fetches details on parcel with specific parcel ID",
 	Run: func(cmd *cobra.Command, args []string) {
 		parcelId, err := cmd.Flags().GetInt("parcelId")
 		if err != nil {
@@ -50,6 +50,11 @@ var parcelDetailsCmd = &cobra.Command{
 			}
 		}
 	},
+	Example: `//Returns details on parcel with specified parcel ID
+gk parcelDetails -p 21384620
+//Returns details in JSON format on parcel with specified parcel ID
+gk parcelDetails -p 21384620 --json
+`,
 }
 
 func init() {
@@ -57,4 +62,5 @@ func init() {
 
 	parcelDetailsCmd.Flags().IntP("parcelId", "p", 0, "Specify the parcel ID")
 	parcelDetailsCmd.Flags().Bool("json", false, "Show full JSON")
+	parcelDetailsCmd.MarkFlagRequired("parcelId")
 }

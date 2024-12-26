@@ -19,7 +19,6 @@ func FetchOffices() []Office {
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println(string(body))
 	var offices []Office
 	err = json.Unmarshal(body, &offices)
 	if err != nil {
@@ -48,7 +47,11 @@ func FetchDepartments() []Department {
 }
 
 func FetchMunicipalities(officeId int, departmentId int) []Municipality {
-	res, err := http.Get(fmt.Sprintf("https://oss.uredjenazemlja.hr/oss/public/search-cad-parcels/municipalities?search=&officeId=%d&departmentId=%d", officeId, departmentId))
+	uri := fmt.Sprintf("https://oss.uredjenazemlja.hr/oss/public/search-cad-parcels/municipalities?search=&officeId=%d&departmentId=%d", officeId, departmentId)
+	if departmentId == 0 {
+		uri = fmt.Sprintf("https://oss.uredjenazemlja.hr/oss/public/search-cad-parcels/municipalities?search=&officeId=%d", officeId)
+	}
+	res, err := http.Get(uri)
 	if err != nil {
 		log.Fatal(err)
 	}

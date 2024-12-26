@@ -15,7 +15,7 @@ import (
 // municipalityCmd represents the municipality command
 var municipalityCmd = &cobra.Command{
 	Use:   "municipality",
-	Short: "Dohvaća katastarske općine",
+	Short: "Fetches municipalities. Note that you will need the registration number rather than the ID to fetch parcels later",
 	Run: func(cmd *cobra.Command, args []string) {
 		departmentId, err := cmd.Flags().GetInt("department")
 		if err != nil {
@@ -30,6 +30,10 @@ var municipalityCmd = &cobra.Command{
 			}
 		}
 	},
+	Example: `//Returns all municipalities in specifed department
+gk municipality -d 34
+//Returns all municipalities in specifed office
+gk municipality -o 100`,
 }
 
 func init() {

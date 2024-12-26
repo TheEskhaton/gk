@@ -12,7 +12,7 @@ import (
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "gk",
-	Short: "CLI Aplikacija za dohvacanje katastarskih podataka",
+	Short: "CLI application for fetching Croatian cadastral data",
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.

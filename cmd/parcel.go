@@ -15,7 +15,7 @@ import (
 // parcelCmd represents the parcel command
 var parcelCmd = &cobra.Command{
 	Use:   "parcel",
-	Short: "Pretražuje katastarske čestice unutar općine",
+	Short: "Searches for parcel numbers starting with a specific string in a specific municipality",
 	Run: func(cmd *cobra.Command, args []string) {
 		municipalityRegNbr, err := cmd.Flags().GetInt("municipalityRegNbr")
 		if err != nil {
@@ -30,6 +30,9 @@ var parcelCmd = &cobra.Command{
 			}
 		}
 	},
+	Example: `//Searches for parcels with a parcel number beginning with 32 in the municipality 
+// with registration number 335576
+gk parcel -m 335576 -p 32`,
 }
 
 func init() {

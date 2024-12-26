@@ -13,13 +13,14 @@ import (
 // officeCmd represents the office command
 var officeCmd = &cobra.Command{
 	Use:   "office",
-	Short: "Dohvaća katastarske urede",
+	Short: "Fetchse cadastral offices",
 	Run: func(cmd *cobra.Command, args []string) {
 		offices := api.FetchOffices()
 		for _, office := range offices {
 			fmt.Printf("%d: %s\n", office.ID, office.Name)
 		}
 	},
+	Example: "gk office",
 }
 
 func init() {
