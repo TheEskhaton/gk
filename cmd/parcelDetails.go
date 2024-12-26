@@ -39,14 +39,23 @@ var parcelDetailsCmd = &cobra.Command{
 		} else {
 			for _, parcelDetail := range parcelDetails {
 				var possessors string
-				for _, possessor := range parcelDetail.PossessionSheet.Possessors {
-					possessors = possessors + "\t" + possessor.Name + "\n"
+				if len(parcelDetail.PossessionSheet.Possessors) > 0 {
+					for _, possessor := range parcelDetail.PossessionSheet.Possessors {
+						possessors = possessors + "\t" + possessor.Name + " (" + possessor.Ownership + ")" + "\n"
+					}
+				} else {
+					for _, share := range parcelDetail.LrUnit.OwnershipSheetB.LrUnitShares {
+						for _, owner := range share.LrOwners {
+							possessors = possessors + "\t" + owner.Name + " (" + share.Share + ")" + "\n"
+						}
+					}
 				}
 				fmt.Printf("Parcel Number: %s\nArea: %sm2\nMunicipality: %s\nPossesors:\n%s",
 					parcelDetail.ParcelNumber,
 					parcelDetail.Area,
 					parcelDetail.CADMunicipalityName,
 					possessors[:len(possessors)-1])
+
 			}
 		}
 	},

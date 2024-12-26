@@ -41,6 +41,7 @@ type ParcelDetail struct {
 	PossessionSheet       PossessionSheet `json:"possessionSheet"`
 	ParcelLinks           []ParcelLink    `json:"parcelLinks"`
 	IsAdditionalDataSet   bool            `json:"isAdditionalDataSet"`
+	LrUnit                LrUnit          `json:"lrUnit"`
 	LegalRegime           bool            `json:"legalRegime"`
 	Graphic               bool            `json:"graphic"`
 	AlphaNumeric          bool            `json:"alphaNumeric"`
@@ -56,25 +57,34 @@ type ParcelLink struct {
 }
 
 type LrUnit struct {
-	LrUnitID      int64  `json:"lrUnitId"`
-	LrUnitNumber  string `json:"lrUnitNumber"`
-	MainBookID    int64  `json:"mainBookId"`
-	MainBookName  string `json:"mainBookName"`
-	InstitutionID int64  `json:"institutionId"`
-	Status        string `json:"status"`
-	Verificated   bool   `json:"verificated"`
-	Condominiums  bool   `json:"condominiums"`
+	LrUnitID                 int64           `json:"lrUnitId"`
+	LrUnitNumber             string          `json:"lrUnitNumber"`
+	MainBookID               int64           `json:"mainBookId"`
+	MainBookName             string          `json:"mainBookName"`
+	InstitutionID            int64           `json:"institutionId"`
+	Status                   string          `json:"status"`
+	Verificated              bool            `json:"verificated"`
+	Condominiums             bool            `json:"condominiums"`
+	CadastreMunicipalityID   int64           `json:"cadastreMunicipalityId"`
+	InstitutionName          string          `json:"institutionName"`
+	StatusName               string          `json:"statusName"`
+	LrUnitTypeID             int64           `json:"lrUnitTypeId"`
+	LrUnitTypeName           string          `json:"lrUnitTypeName"`
+	OwnershipSheetB          OwnershipSheetB `json:"ownershipSheetB"`
+	OSSDataRestrictionStatus int64           `json:"ossDataRestrictionStatus"`
 }
 
 type ParcelPart struct {
-	ParcelPartID          int64  `json:"parcelPartId"`
-	Name                  string `json:"name"`
-	Area                  string `json:"area"`
-	PossessionSheetID     int64  `json:"possessionSheetId"`
-	PossessionSheetNumber string `json:"possessionSheetNumber"`
-	LastChangeLog         string `json:"lastChangeLog"`
-	LastElaborateNumber   string `json:"lastElaborateNumber"`
-	Building              bool   `json:"building"`
+	ParcelPartID          int64   `json:"parcelPartId"`
+	Name                  string  `json:"name"`
+	Area                  string  `json:"area"`
+	PossessionSheetID     int64   `json:"possessionSheetId"`
+	PossessionSheetNumber string  `json:"possessionSheetNumber"`
+	LastChangeLog         string  `json:"lastChangeLog"`
+	LastElaborateNumber   string  `json:"lastElaborateNumber"`
+	Building              bool    `json:"building"`
+	Type                  *string `json:"type,omitempty"`
+	BuildingRight         *int64  `json:"buildingRight,omitempty"`
 }
 
 type PossessionSheet struct {
@@ -90,4 +100,28 @@ type Possessor struct {
 	Name      string `json:"name"`
 	Ownership string `json:"ownership"`
 	Address   string `json:"address"`
+}
+
+type OwnershipSheetB struct {
+	LrUnitShares []LrUnitShare `json:"lrUnitShares"`
+	LrEntries    []interface{} `json:"lrEntries"`
+}
+
+type LrUnitShare struct {
+	Description         string        `json:"description"`
+	LrOwners            []LrOwner     `json:"lrOwners"`
+	LrUnitShareID       int64         `json:"lrUnitShareId"`
+	Share               string        `json:"share"`
+	CondominiumNumber   string        `json:"condominiumNumber"`
+	Condominiums        []string      `json:"condominiums"`
+	SubSharesAndEntries []interface{} `json:"subSharesAndEntries"`
+	Status              int64         `json:"status"`
+	OrderNumber         string        `json:"orderNumber"`
+}
+
+type LrOwner struct {
+	LrOwnerID int64  `json:"lrOwnerId"`
+	Name      string `json:"name"`
+	Address   string `json:"address"`
+	TaxNumber string `json:"taxNumber"`
 }
