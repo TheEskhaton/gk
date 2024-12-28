@@ -125,3 +125,7 @@ type LrOwner struct {
 	Address   string `json:"address"`
 	TaxNumber string `json:"taxNumber"`
 }
+
+type PossesionSheetExtract struct {
+	FileUrl string
+}

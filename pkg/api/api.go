@@ -3,6 +3,7 @@ package api
 import (
 	"bytes"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"log"
@@ -100,4 +101,68 @@ func FetchParcelDetails(parcelId int) []ParcelDetail {
 		log.Fatal(err)
 	}
 	return parcelDetails
+}
+
+type ExtractType string
+
+const (
+	LR            ExtractType = "LR"
+	PropertyDeed  ExtractType = "PropertyDeed"
+	CadastralPlan ExtractType = "CadastralPlan"
+)
+
+func (e *ExtractType) String() string {
+	return string(*e)
+}
+
+func (e *ExtractType) Set(v string) error {
+	switch v {
+	case "LR", "PropertyDeed", "CadastralPlan":
+		*e = ExtractType(v)
+		return nil
+	default:
+		return errors.New(`must be one of "LR", "PropertyDeed", "CadastralPlan"`)
+	}
+}
+
+func (e *ExtractType) Type() string {
+	return "ExtractType"
+}
+
+func FetchPossesionSheetExtract(parcelId int, possessionSheetId int, extractType ExtractType) []PossesionSheetExtract {
+	uri := "https://oss.uredjenazemlja.hr/oss/public/reports/get-possessionsheet-extract?parcelId=%d"
+	id := parcelId
+	switch extractType {
+	case PropertyDeed:
+		uri = "https://oss.uredjenazemlja.hr/oss/public/reports/get-possessionsheet-extract?possessionSheetId=%d"
+		id = possessionSheetId
+	case CadastralPlan:
+		uri = "https://oss.uredjenazemlja.hr/oss/public/reports/get-kp-extract/%d"
+		id = parcelId
+	}
+	res, err := http.Get(fmt.Sprintf(uri, id))
+	if err != nil {
+		log.Fatal(err)
+	}
+	body, err := io.ReadAll(res.Body)
+	if err != nil {
+		log.Fatal(err)
+	}
+	if extractType == CadastralPlan {
+
+		var possesionSheetExtract PossesionSheetExtract
+		err = json.Unmarshal(body, &possesionSheetExtract)
+		if err != nil {
+			log.Fatal(err)
+		}
+		return []PossesionSheetExtract{possesionSheetExtract}
+	} else {
+
+		var possesionSheetExtracts []PossesionSheetExtract
+		err = json.Unmarshal(body, &possesionSheetExtracts)
+		if err != nil {
+			log.Fatal(err)
+		}
+		return possesionSheetExtracts
+	}
 }
