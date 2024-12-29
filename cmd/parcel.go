@@ -1,6 +1,3 @@
-/*
-Copyright © 2024 NAME HERE <EMAIL ADDRESS>
-*/
 package cmd
 
 import (
@@ -12,7 +9,6 @@ import (
 	"github.com/theeskhaton/gk/pkg/api"
 )
 
-// parcelCmd represents the parcel command
 var parcelCmd = &cobra.Command{
 	Use:   "parcel",
 	Short: "Searches for parcel numbers starting with a specific string in a specific municipality",

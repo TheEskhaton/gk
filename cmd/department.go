@@ -1,6 +1,3 @@
-/*
-Copyright © 2024 NAME HERE <EMAIL ADDRESS>
-*/
 package cmd
 
 import (
@@ -10,7 +7,6 @@ import (
 	"github.com/theeskhaton/gk/pkg/api"
 )
 
-// departmentCmd represents the department command
 var departmentCmd = &cobra.Command{
 	Use:   "department",
 	Short: "Fetches cadastral departments",

@@ -1,6 +1,3 @@
-/*
-Copyright © 2024 NAME HERE <EMAIL ADDRESS>
-*/
 package cmd
 
 import (
@@ -12,7 +9,6 @@ import (
 	"github.com/theeskhaton/gk/pkg/api"
 )
 
-// municipalityCmd represents the municipality command
 var municipalityCmd = &cobra.Command{
 	Use:   "municipality",
 	Short: "Fetches municipalities. Note that you will need the registration number rather than the ID to fetch parcels later",

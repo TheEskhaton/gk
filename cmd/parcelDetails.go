@@ -1,6 +1,3 @@
-/*
-Copyright © 2024 NAME HERE <EMAIL ADDRESS>
-*/
 package cmd
 
 import (
@@ -13,7 +10,6 @@ import (
 	"github.com/theeskhaton/gk/pkg/api"
 )
 
-// parcelDetailsCmd represents the parcelDetails command
 var parcelDetailsCmd = &cobra.Command{
 	Use:   "parcelDetails",
 	Short: "Fetches details on parcel with specific parcel ID",

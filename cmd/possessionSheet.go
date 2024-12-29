@@ -1,6 +1,3 @@
-/*
-Copyright © 2024 NAME HERE <EMAIL ADDRESS>
-*/
 package cmd
 
 import (
@@ -16,7 +13,6 @@ var extractType api.ExtractType
 
 const ExtractBaseUri = "https://oss.uredjenazemlja.hr/oss/public"
 
-// possessionSheetCmd represents the possessionSheet command
 var possessionSheetCmd = &cobra.Command{
 	Use:   "possessionSheet",
 	Short: "Fetches unofficial posseession sheet extracts, cadastral plans and LR extracts",
@@ -46,7 +42,7 @@ var possessionSheetCmd = &cobra.Command{
 		propertySheet := api.FetchPossesionSheetExtract(parcelId, possessionSheetId, extractType)
 		fmt.Println(ExtractBaseUri + propertySheet[0].FileUrl)
 	},
-	Example: `//The following command fetch a file URL pointing to the specified document
+	Example: `//The following commands fetch a file URL pointing to the specified document
 gk possessionSheet --type CadastralPlan -p 123456
 gk possessionSheet --type LR -p 123456
 gk possessionSheet --type PropertyDeed -s 654321`,
